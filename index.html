@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouba.cz - Poznejte Konkókjó</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS PROMĚNNÉ PRO STYL "BOŽSKÉ LÁSKY" --- */
+        :root {
+            --primary-color: #d4a373; /* Teplá zlatavá / písková */
+            --secondary-color: #fefae0; /* Nebesky krémová */
+            --accent-color: #e29578; /* Jemná cihlovo-růžová */
+            --bg-color: #fffaf7; /* Velmi jemný teplý nádech pozadí */
+            --text-color: #4a4a4a; /* Měkčí tmavě šedá pro lepší čitelnost */
+            --heading-color: #333d29; /* Hluboká zemitá pro nadpisy */
+        }
+
+        /* --- ZÁKLADNÍ NASTAVENÍ --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Lora', serif;
+            color: var(--heading-color);
+            margin-bottom: 15px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- NAVIGACE --- */
+        nav {
+            background-color: rgba(254, 250, 224, 0.95);
+            padding: 15px 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            backdrop-filter: blur(5px);
+        }
+
+        .logo {
+            font-family: 'Lora', serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--heading-color);
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        /* --- HLAVNÍ SEKCE (HERO) --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 5% 50px;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #faedcd 100%);
+            border-bottom-left-radius: 50% 5vh;
+            border-bottom-right-radius: 50% 5vh;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .hero h2 {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: var(--heading-color);
+        }
+
+        .quote {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            background: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+            display: inline-block;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .hero-text {
+            max-width: 800px;
+            font-size: 1.1rem;
+        }
+
+        /* --- OBECNÉ SEKCE --- */
+        section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .content-block {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .content-block:hover {
+            transform: translateY(-5px);
+        }
+
+        /* --- KARTY PRO UČENÍ A PRAXI --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(226, 149, 120, 0.1);
+            border-top: 5px solid var(--accent-color);
+        }
+
+        .card h3 {
+            color: var(--accent-color);
+        }
+
+        /* --- ODKAZY --- */
+        .link-list {
+            list-style: none;
+        }
+        
+        .link-list li {
+            background: var(--secondary-color);
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .link-list strong {
+            display: block;
+            font-family: 'Lora', serif;
+            font-size: 1.2rem;
+            color: var(--heading-color);
+        }
+
+        /* --- FAQ AKORDEON --- */
+        .faq-item {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            padding: 20px;
+            background: none;
+            border: none;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--heading-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            background: #fafafa;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px 20px;
+            max-height: 500px; /* Dostatečná výška pro text */
+        }
+
+        /* --- PATIČKA --- */
+        footer {
+            background-color: var(--heading-color);
+            color: var(--secondary-color);
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+        }
+
+        /* --- RESPONZIVITA --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Pro jednoduchost na mobilu skryjeme, lze přidat hamburger menu */
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            section {
+                padding: 50px 5%;
+            }
+        }
+
+        /* --- COOKIE LIŠTA --- */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--heading-color);
+            color: var(--secondary-color);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 9999;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .cookie-banner p {
+            margin: 0;
+            font-size: 0.95rem;
+            flex: 1;
+            min-width: 250px;
+        }
+        .cookie-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .cookie-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .cookie-btn-accept {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        .cookie-btn-accept:hover {
+            background-color: var(--primary-color);
+        }
+        .cookie-btn-reject {
+            background-color: transparent;
+            color: var(--secondary-color);
+            border: 1px solid var(--secondary-color);
+        }
+        .cookie-btn-reject:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* --- KONTAKTNÍ FORMULÁŘ --- */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            background: #fafafa;
+            transition: border-color 0.3s ease;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: white;
+        }
+        .contact-form label.gdpr-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #666;
+            cursor: pointer;
+        }
+        .contact-form button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            align-self: flex-start;
+        }
+        .contact-form button:hover {
+            background-color: var(--primary-color);
+        }
+
+        /* --- DUCHOVNÍ MOUDROSTI KARTY --- */
+        .wisdom-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .wisdom-item {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            border-left: 4px solid var(--primary-color);
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--heading-color);
+            display: flex;
+            align-items: center;
+        }
+
+        /* --- RODINNÉ AKTIVITY SEZNAM --- */
+        .family-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+        .family-list li {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .family-list li::before {
+            content: '•';
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+        .family-list h4 {
+            color: var(--heading-color);
+            margin-bottom: 5px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        /* --- GENERÁTOR VDĚČNOSTI A NOTIFIKACE --- */
+        .interactive-box {
+            background: linear-gradient(135deg, white 0%, var(--secondary-color) 100%);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid rgba(212, 163, 115, 0.3);
+        }
+        .interactive-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(226, 149, 120, 0.4);
+        }
+        .interactive-btn:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        .interactive-btn.secondary {
+            background-color: var(--heading-color);
+            box-shadow: 0 5px 15px rgba(51, 61, 41, 0.3);
+        }
+        .interactive-btn.secondary:hover {
+            background-color: #1a2015;
+        }
+        .gratitude-result {
+            font-family: 'Lora', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--heading-color);
+            min-height: 80px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+        /* --- NOVÉ: ČASOVÁ OSA --- */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto 0;
+            padding-left: 30px;
+            border-left: 3px solid var(--primary-color);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border: 3px solid var(--accent-color);
+            border-radius: 50%;
+        }
+        .timeline-date {
+            font-weight: bold;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            font-family: 'Lora', serif;
+        }
+
+        /* --- NOVÉ: SLOVNÍČEK POJMŮ --- */
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .glossary-item {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            border-left: 4px solid var(--accent-color);
+        }
+        .glossary-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Bouba.cz</div>
+        <div class="nav-links">
+            <a href="#uvod">Úvod</a>
+            <a href="#uceni">Učení</a>
+            <a href="#prvni-pomoc">První pomoc</a>
+            <a href="#moudrosti">Moudrosti</a>
+            <a href="#notifikace">Ranní zprávy</a>
+            <a href="#vdecnost">Vděčnost</a>
+            <a href="#praxe">Praxe</a>
+            <a href="#historie">Historie</a>
+            <a href="#slovnicek">Slovníček</a>
+            <a href="#faq">FAQ</a>
+        </div>
+    </nav>
+
+    <header class="hero" id="domu">
+        <h1>Vítejte na Bouba.cz:<br>Poznejte Konkókjó</h1>
+        <h2>Japonská cesta k vnitřnímu klidu a harmonii s laskavým vesmírem</h2>
+        <div class="quote">
+            „Kami myslí jen na záchranu lidí, na nic jiného.“
+        </div>
+        <div class="hero-text">
+            <p>Představte si víru, která vás nestraší hříchem, nevyžaduje přísné odříkání a nevnucuje vám složitá dogmata. Představte si duchovní cestu, která nestaví Boha do role přísného soudce, ale chápe ho jako obrovskou, pečující a milující sílu vesmíru, jejíž jsme všichni součástí.</p>
+            <br>
+            <p><strong>Přesně takové je Konkókjó.</strong></p>
+            <br>
+            <p>Jde o moderní japonskou životní filozofii a náboženství, které vzniklo v 19. století s jedním prostým cílem: pomoci lidem najít štěstí a úlevu v každodenním životě. Učí nás, že náš vztah s vesmírem (Kami) je oboustranný. My potřebujeme vesmír, abychom mohli žít, ale vesmír zároveň potřebuje nás – naše dobré skutky, upřímnost a laskavost – aby mohl ve světě konat dobro.</p>
+            <br>
+            <p>Ať už hledáte odpovědi na složité životní otázky, nebo jen chvilku zklidnění v dnešním uspěchaném světě, jste tu správně. Zahoďte předsudky o přísných asijských kultech a pojďte s námi objevit učení, pro které je i ten nejobyčejnější lidský život posvátný.</p>
+        </div>
+    </header>
+
+    <section id="uvod">
+        <h2 class="section-title">Co je Konkókjó? (Úvod do víry)</h2>
+        <div class="content-block">
+            <p>Název Konkókjó (čte se kon-kó-kjó) zní našinci v Česku možná trochu exoticky. Pravděpodobně jste o něm dodnes nikdy neslyšeli, a to je naprosto v pořádku. Jde o moderní japonskou duchovní cestu, která vznikla v polovině 19. století.</p>
+            <br>
+            <p>Pokud si pod pojmem náboženství představíte strach z hříchu, hrozbu pekla, slepou poslušnost nebo odtržení od reality, Konkókjó vás překvapí. Nemá žádná přísná tabu ani vás nenutí vzdát se běžného života. Naopak – je to neobyčejně praktická, laskavá a otevřená životní filozofie určená pro dnešní uspěchaný svět.</p>
+            
+            <h3 style="margin-top: 30px;">Nejsme tu za trest, jsme děti vesmíru</h3>
+            <p>Představte si vesmír ne jako chladný a prázdný prostor, ale jako obrovskou, živoucí a pečující sílu. V Konkókjó se této síle říká Tenči Kane no Kami (Zlaté božstvo nebes a země). Nejde o starce s plnovousem sedícího na obláčku, ale o samotný princip života, který nás obklopuje, dává nám energii a neustále nás podporuje. Konkókjó učí krásnou a jednoduchou myšlenku: všichni jsme „děti vesmíru“. A tato vesmírná síla si nepřeje nic jiného, než abychom žili šťastně a v harmonii.</p>
+
+            <h3 style="margin-top: 30px;">Bůh potřebuje nás, stejně jako my potřebujeme Boha</h3>
+            <p>Zcela unikátní je pohled na vztah mezi člověkem a božstvem. Konkókjó netvrdí, že jsme jen bezvýznamná smítka prachu, která se musí klanět nedosažitelnému stvořiteli. Učí, že náš vztah s vesmírem je oboustranný. My sice potřebujeme podporu vesmíru, abychom mohli žít, ale vesmír zároveň potřebuje nás.</p>
+            <br>
+            <p>Proč? Protože laskavost, láska a mír se mohou ve fyzickém světě projevit jedině skrze naše lidské činy. Když si lidé navzájem pomáhají a žijí dobrý život, naplňují tím samotný smysl božství.</p>
+
+            <h3 style="margin-top: 30px;">Duchovno pro všední den</h3>
+            <p>Být stoupencem Konkókjó nevyžaduje odchod do kláštera. Tato víra se praktikuje uprostřed běžného života – v práci, v rodině, při každodenních radostech i starostech. Základem je snaha o nalezení vnitřního míru a kultivaci takzvaného „božského srdce“. To v praxi neznamená nic jiného než žít s upřímností k sobě i ostatním, být tolerantní, ohleduplný a nacházet vděčnost za každý nový den. Konkókjó je tu proto, aby lidem pomáhalo řešit jejich každodenní problémy a přinášelo jim úlevu.</p>
+        </div>
+    </section>
+
+    <section id="uceni">
+        <h2 class="section-title">Základní učení: Harmonie mezi člověkem a vesmírem</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto;">Filozofie Konkókjó se nesnaží vysvětlovat složité teologické záhady, ale spíše nabízí praktický návod, jak žít dobrý a naplněný život. Abychom to lépe pochopili, pojďme se podívat na tři hlavní pilíře, na kterých toto učení stojí.</p>
+        
+        <div class="grid-container">
+            <div class="card">
+                <h3>Aijo-Kakejo</h3>
+                <p><strong>(Vzájemná závislost: Potřebujeme se navzájem)</strong></p>
+                <br>
+                <p>Toto je pravděpodobně nejkrásnější a nejunikátnější myšlenka celého Konkókjó. Tradiční náboženství často učí, že Bůh je všemocný vládce a člověk je na něm zcela závislý. Konkókjó ale přináší revoluční pohled: náš vztah s vesmírem je partnerství.</p>
+                <br>
+                <p>Božstvo dává lidem život, my na oplátku svými dobrými skutky dáváme této síle možnost projevit se ve světě. Věří se, že pokud lidé trpí, božstvo trpí s nimi.</p>
+            </div>
+            
+            <div class="card">
+                <h3>Tenči Kane no Kami</h3>
+                <p><strong>(Zlaté božstvo nebes a země)</strong></p>
+                <br>
+                <p>Koho vlastně stoupenci Konkókjó uctívají? Tenči Kane no Kami představuje spíše samotnou podstatu přírody a vesmíru.</p>
+                <br>
+                <p>Je to nekonečná, laskavá a životodárná energie, ze které vše pochází. Konkókjó učí, že vesmír není náš nepřítel, nepředhazuje nám překážky za trest a nesesílá kletby. Vše, co se děje, je součástí přirozeného řádu, a my jsme milovanými dětmi tohoto obrovského celku.</p>
+            </div>
+
+            <div class="card">
+                <h3>Ikigami</h3>
+                <p><strong>(Živoucí božstvo: Ruce vesmíru tady na zemi)</strong></p>
+                <br>
+                <p>Protože laskavý vesmír nemá fyzické tělo, potřebuje lidi, aby mohli v tomto světě pomáhat druhým. Když člověk odloží své sobectví a jedná s absolutní upřímností a soucitem, stává se v tu chvíli nástrojem vesmíru. Skrze jeho činy jedná samotné božstvo.</p>
+                <br>
+                <p>Takový člověk se stává Ikigami – živoucím projevem dobra na zemi. Cílem každého věřícího je snažit se v běžném životě jednat tak obětavě a laskavě, aby se i on stal prodlouženou „rukou vesmíru“.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="prvni-pomoc">
+        <h2 class="section-title">První pomoc pro duši</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 30px auto;">Každý z nás někdy zabloudí, cítí vztek, strach nebo vyčerpání. Zde najdete uklidňující pohled na běžné životní těžkosti očima učení Konkókjó.</p>
+        
+        <div class="faq-container">
+            
+            <div class="faq-item">
+                <button class="faq-question">1. Když cítím silnou úzkost z budoucnosti</button>
+                <div class="faq-answer">
+                    <p><br>Zastavte se a uvědomte si, že vesmír (Kami) není trestající, ale pečující. Nemá smysl žít v obavách z toho, co se ještě nestalo. Konkókjó učí: "Praktikovat víru znamená žít den za dnem." Soustřeďte se jen na dnešek a na to, co můžete udělat teď.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">2. Když na někoho cítím obrovský vztek</button>
+                <div class="faq-answer">
+                    <p><br>Hněv ubližuje hlavně vám, protože "vrhá mrak na vaše srdce". Zkuste se na dotyčného podívat jinýma očima – i on je dítětem vesmíru, které možná jen zabloudilo nebo trpí. Dýchejte a zkuste svůj hněv vědomě odevzdat vesmíru, aby se vaše srdce opět vyjasnilo.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">3. Když se cítím osaměle a opuštěně</button>
+                <div class="faq-answer">
+                    <p><br>V Konkókjó nejste nikdy sami. Jste neustále propojeni s laskavou energií nebes a země (Tenči Kane no Kami). Vesmír vás podporuje každým vaším nádechem. Zkuste tuto energii poslat dál – usmějte se na někoho na ulici nebo někomu pomozte. Když se stanete "rukama vesmíru", samota zmizí.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">4. Když mě svazuje strach z chyb a minulosti</button>
+                <div class="faq-answer">
+                    <p><br>Minulost nezměníte a vesmír si nevede žádnou knihu hříchů, aby vás mohl trestat. Záleží jen na vašem současném postoji. "Pokud obnovíte své srdce, pak můžete sklízet nekonečná požehnání." Odpusťte si a začněte znovu právě teď, s čistým a upřímným štítem.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">5. Když mě trápí fyzická bolest nebo nemoc</button>
+                <div class="faq-answer">
+                    <p><br>Nemoc není kletba ani trest. Modlete se za své zdraví, ale zároveň zkuste najít vděčnost za to, co ve vašem těle stále funguje (tlukot srdce, dýchání). Přijetí situace bez pocitu křivdy často přináší obrovskou psychickou i fyzickou úlevu.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">6. Když mám pocit, že nic nestíhám a jsem pod tlakem</button>
+                <div class="faq-answer">
+                    <p><br>Tlak si často vytváříme sami. Zkuste si v duchu udělat krátké zprostředkování (Toricugi) – prostě vesmíru upřímně řekněte: "Teď toho mám moc, pomoz mi to zvládnout." Pak si vyberte jen jeden jediný úkol a ten udělejte s maximální upřímností (Makoto). Ostatní počká.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">7. Když mě pohltí závist nebo žárlivost</button>
+                <div class="faq-answer">
+                    <p><br>Závist znamená, že nevidíte své vlastní dary. Rozhlédněte se kolem sebe a vyjmenujte tři úplně obyčejné věci, které máte (teplo, jídlo, zdravé ruce). Vaše cesta je unikátní a vesmír vám dává přesně to, co potřebujete k růstu vašeho vlastního božského srdce.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">8. Když zažívám rodinné spory a hádky</button>
+                <div class="faq-answer">
+                    <p><br>Konkókjó učí, že "srdce, které cítí soucit, je srdcem Kamiho". Nesnažte se za každou cenu vyhrát hádku. Zkuste druhého člověka upřímně vyslechnout bez okamžitého posuzování. Někdy stačí jen kapka laskavosti a pochopení, aby hádka ztratila svou sílu.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">9. Když trpím pocitem méněcennosti</button>
+                <div class="faq-answer">
+                    <p><br>Pamatujte na koncept vzájemné závislosti (Aijo-Kakejo). Vesmír vás potřebuje úplně stejně jako vy jeho. Vaše dobré skutky, vaše práce a vaše upřímnost mají obrovský smysl. Nejste bezvýznamní – jste nástrojem dobra v tomto světě.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">10. Když se bojím, že mám smůlu nebo "špatný den"</button>
+                <div class="faq-answer">
+                    <p><br>Odmítněte pověry. Neexistují proklaté dny, špatná znamení ani zlé směry. "Pro Kamiho není den ani noc, blízko ani daleko." Každý den je dobrý, pokud do něj vstoupíte s upřímným a vděčným srdcem. Smůlu si často vytváříme jen vlastním strachem.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">11. Když nevím, jak se rozhodnout</button>
+                <div class="faq-answer">
+                    <p><br>Zklidněte se a zeptejte se svého vlastního srdce. Rozhodujte se podle toho, co je nejvíce v souladu s upřímností (Makoto) a ohleduplností k ostatním. Pokud vaše rozhodnutí nikomu neubližuje a vychází z čistých úmyslů, vesmír vaši cestu podpoří.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">12. Když mi někdo velmi ublížil</button>
+                <div class="faq-answer">
+                    <p><br>Nemusíte chování toho člověka omlouvat, ale kvůli svému vlastnímu klidu se ho snažte vnitřně propustit. Neživte v sobě toxickou zášť. Odevzdejte tu bolest vesmíru a soustřeďte se na to, abyste kultivovali laskavost ve svém vlastním životě.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">13. Když cítím apatii a ztrátu smyslu života</button>
+                <div class="faq-answer">
+                    <p><br>Hledáte smysl v něčem příliš velkém. Smysl života podle Konkókjó leží v obyčejnosti. Jít poctivě do práce, uvařit pro někoho jídlo, hezky pozdravit souseda – to jsou ty nejvyšší duchovní praxe. Smysl se objeví, když začnete dělat malé věci s velkým srdcem.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">14. Když truchlím ze ztráty blízkého člověka</button>
+                <div class="faq-answer">
+                    <p><br>Smrt není definitivní konec v temnotě. Váš blízký se vrátil do laskavé energie vesmíru, ze které jsme všichni vzešli. Věřte, že jeho duch (Mitama) je stále s vámi a s láskou na vás dohlíží. Místo zoufalství mu zkuste poslat upřímné poděkování za čas, který jste spolu mohli strávit.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">15. Když se mi nedaří usnout kvůli vířícím myšlenkám</button>
+                <div class="faq-answer">
+                    <p><br>Vaše mysl se snaží vyřešit problémy, na které teď v noci nestačí. Zastavte myšlenky jednoduchou praxí: začněte v duchu děkovat. Poděkujte posteli, že je měkká. Poděkujte tělu, že vás celý den nosilo. "Nikdy nezapomeňte mít vděčné srdce." Vděčnost zastaví stres a přinese klidný spánek.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="moudrosti">
+        <h2 class="section-title">Duchovní moudrosti</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto;">Přečtěte si několik základních citátů a myšlenek, které formují pohled na svět učení Konkókjó.</p>
+        <div class="wisdom-grid">
+            <div class="wisdom-item">Praktikovat víru znamená žít den za dnem.</div>
+            <div class="wisdom-item">Modlete se za své zdraví. Posilujte své tělo. Dobré zdraví je základem všeho.</div>
+            <div class="wisdom-item">Vděčný není jen za to, že se člověk vyléčí. Vděčný je i za to, že je neustále v dobrém zdravotním stavu.</div>
+            <div class="wisdom-item">Srdce, které cítí soucit, je srdcem Kamiho.</div>
+            <div class="wisdom-item">Hněv vrhá mrak na srdce.</div>
+            <div class="wisdom-item">Nikdy nezapomeňte mít vděčné srdce, kdykoli pijete nebo jíte.</div>
+            <div class="wisdom-item">Božská požehnání závisí na vašem srdci. Pokud obnovíte své srdce, pak můžete sklízet nekonečná božská požehnání.</div>
+            <div class="wisdom-item">Který jedinec je důležitější, ty nebo někdo jiný? Všichni jsme lidské bytosti.</div>
+            <div class="wisdom-item">Kami myslí jen na záchranu lidí, na nic jiného.</div>
+            <div class="wisdom-item">Nemluv špatně o žádném náboženství. Každý je dítětem Tenchi Kane No Kami.</div>
+            <div class="wisdom-item">Všichni lidé jsou dětmi Kamiho. Není nikdo, kdo by někam nepatřil.</div>
+            <div class="wisdom-item">Jídlo vyrábí a poskytuje Tenchi No Kami pro udržení života.</div>
+            <div class="wisdom-item">Pro Kamiho není den ani noc, blízko ani daleko. Modlete se s upřímným srdcem kdykoli a kdekoli.</div>
+        </div>
+    </section>
+
+    <section id="notifikace">
+        <h2 class="section-title">Ranní pohlazení po duši</h2>
+        <div class="interactive-box">
+            <h3 style="color: var(--heading-color); margin-bottom: 15px;">Získejte ranní moudrost přímo do vašeho zařízení</h3>
+            <p style="margin-bottom: 25px;">Dovolte nám poslat vám každé ráno krátké, uklidňující slovo přímo od laskavého vesmíru, které vás naladí na klidný a úspěšný den.</p>
+            <button id="notif-btn" class="interactive-btn secondary" onclick="subscribeToNotifications()">Povolit ranní zprávy</button>
+            <p id="notif-status" style="margin-top: 15px; font-weight: bold; color: var(--accent-color);"></p>
+        </div>
+    </section>
+
+    <section id="vdecnost">
+        <h2 class="section-title">Cvičení vděčnosti</h2>
+        <div class="interactive-box">
+            <button class="interactive-btn" onclick="generateGratitude()">Za co mohu být dnes vděčný?</button>
+            <div class="gratitude-result" id="gratitude-text">
+                Klikněte na tlačítko a připomeňte si jeden malý dar dnešního dne.
+            </div>
+        </div>
+    </section>
+
+    <section id="praxe">
+        <h2 class="section-title">Každodenní praxe a rituály</h2>
+        <div class="content-block">
+            <p>Když se řekne náboženská praxe, spousta lidí si představí hodiny odříkání, přísné půsty, složitá pravidla nebo klečení v chladném kostele. V Konkókjó nic z toho nenajdete. Tato víra je navržena tak, aby lidem v každodenním životě pomáhala a ulevovala jim.</p>
+            
+            <h3 style="margin-top: 30px;">Toricugi (Duchovní zprostředkování)</h3>
+            <p>Nejdůležitější praxí v celém Konkókjó je takzvané Toricugi. Nejde o klasickou zpověď, kde byste knězi vyjmenovávali své hříchy. Je to spíše hluboký, empatický rozhovor a duchovní poradenství.</p>
+            <br>
+            <p>Věřící přijde za duchovním, posadí se k němu a sdílí cokoliv, co ho trápí nebo těší. Duchovní pozorně naslouchá, s hlubokou upřímností předá prosby vesmíru a následně věřícímu zprostředkuje odpověď. Cílem je přinést člověku úlevu, klid a jasnější pohled na jeho situaci.</p>
+            
+            <h3 style="margin-top: 30px;">Hiromae a modlitba</h3>
+            <p>Místo, kam se věřící chodí modlit, se nazývá Hiromae. Jsou to světlá, otevřená místa s atmosférou komunitního centra. V čele je oltář, u kterého sedí duchovní připravený k Toricugi.</p>
+            <br>
+            <p>Před oltářem se věřící uklánějí a tleskají rukama (v Konkókjó se tleská čtyřikrát na znamení hluboké radosti a úcty). Mnoho věřících má také doma malý oltář zvaný Šinzen, kde mohou každé ráno a večer poděkovat za uplynulý den.</p>
+
+            <div style="background-color: var(--secondary-color); padding: 25px; border-radius: 15px; margin-top: 30px; border-left: 5px solid var(--primary-color);">
+                <h3>Návod na vlastní domácí oltář pro Tenchi Kane no Kami</h3>
+                <p>Vytvořit si doma místo pro uctívání (Šinzen) je velmi prosté a nepotřebujete k tomu žádné speciální relikvie. Najděte si doma klidné, čisté místo (ideálně vyvýšené). Položte tam čistou misku nebo vázu a pravidelně tam s vděčností věnujte čerstvou vodu, trochu rýže, nebo květinu – jako symbol darů od vesmíru.</p>
+                <br>
+                <p>Na oltář si můžete umístit nebo u něj odříkávat posvátnou připomínku zvanou <strong>Tenchi Kakitsuke</strong>. Její česká verze zní:</p>
+                <blockquote style="margin-top: 15px; font-size: 1.1rem; font-family: 'Lora', serif; font-style: italic; background: white; padding: 15px 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    Skrze Ikigami Konko Daijina,<br>
+                    k Tenchi Kane no Kami,<br>
+                    modli se z celého srdce.<br>
+                    Boží přízeň závisí na vlastním srdci člověka.<br>
+                    Právě v tento den se modli.
+                </blockquote>
+            </div>
+
+            <h3 style="margin-top: 30px;">Žádná tabu: Běžný život jako nejlepší praxe</h3>
+            <p>Konkókjó cíleně odmítá různé pověry, "šťastné a nešťastné" dny, prokleté směry nebo přísná stravovací omezení. Jít poctivě do práce, starat se s láskou o děti, uvařit večeři pro rodinu nebo se usmát na souseda – to všechno jsou duchovní úkony. Pokud tyto běžné věci děláte s upřímností a vděčností, praktikujete svou víru přesně tak, jak byla zamýšlena.</p>
+
+            <div style="background-color: var(--bg-color); padding: 25px; border-radius: 15px; margin-top: 40px; border: 2px dashed var(--accent-color);">
+                <h3 style="color: var(--accent-color);">Konkókjó pro rodinu a děti</h3>
+                <p>Učení Konkókjó nestraší děti peklem a nenutí je odříkávat složité modlitby nazpaměť. Učí je všímat si světa kolem sebe, být ohleduplní a chápat, že všechno je propojené. Zde je několik nápadů, jak myšlenky zapojit do rodinného života:</p>
+                
+                <ul class="family-list">
+                    <li>
+                        <h4>Rodinné kolečko naslouchání (Malé Toricugi)</h4>
+                        <p>Zkuste si jednou týdně sednout do kruhu. Každý má minutu na to, aby řekl, co ho ten týden nejvíc potěšilo a co ho naopak trápilo. Ostatní jen tiše a empaticky naslouchají, neskáčou do řeči a neradí. Učí to děti, že jejich pocity jsou důležité a vždy vyslyšené.</p>
+                    </li>
+                    <li>
+                        <h4>Sklenice vděčnosti (Praxe Okage)</h4>
+                        <p>Vezměte prázdnou sklenici. Každý večer si s dětmi řekněte jednu malou věc, za kterou jste dnes vděční (dobrá zmrzlina, nepršelo). Děti to mohou nakreslit na papírek a hodit do sklenice. Na konci měsíce si je společně prohlédněte.</p>
+                    </li>
+                    <li>
+                        <h4>Tleskání pro zahnání „mraku“</h4>
+                        <p>V chrámech se tleská na znamení radosti. Když má dítě "mrak na srdci" (vztek/smutek), navrhněte mu společný zhluboký nádech a čtyři hlasitá tlesknutí. Fyzický pohyb a zvuk často dokážou přerušit záchvat vzteku a přinést úlevu.</p>
+                    </li>
+                    <li>
+                        <h4>Příběh jídla na talíři</h4>
+                        <p>Před večeří se zeptejte: "Kdo všechno musel pomoct, abychom dnes měli tuhle rýži?" Ukažte jim, že to nebyl jen ten, kdo vařil, ale i farmář, slunce, déšť a země. Je to krásná ukázka toho, že jsme součástí velkého celku.</p>
+                    </li>
+                    <li>
+                        <h4>Tajní agenti laskavosti</h4>
+                        <p>Na začátku víkendu si každý tajně vylosuje jméno někoho z rodiny. Úkolem je udělat pro něj během víkendu jeden tajný, hezký skutek (ustlat postel, umýt hrneček). V neděli se hádá, kdo byl čí tajný agent.</p>
+                    </li>
+                    <li>
+                        <h4>Ranní pozdrav nebi a zemi</h4>
+                        <p>Když dítě vstane a roztáhne závěsy, naučte ho říct: "Dobré ráno, vesmíre, děkuji za nový den." Pomáhá to začít den s vědomím, že se probudilo do přátelského a pečujícího světa.</p>
+                    </li>
+                    <li>
+                        <h4>Pěstování rodinné rostlinky</h4>
+                        <p>Pořiďte domů malou rostlinu a dejte ji na starost dětem. Vysvětlete, že bez jejich pomoci (zalévání) by uschla. Ale bez neviditelné energie přírody (Kami) by samotná voda nestačila. Tak se učíme, že se s vesmírem potřebujeme navzájem.</p>
+                    </li>
+                    <li>
+                        <h4>Péče o domácí koutek klidu</h4>
+                        <p>Pokud máte doma malý oltář (Šinzen), zapojte děti. Nechte je ráno vyměnit vodu nebo na procházce najít hezký kamínek, který tam položí jako poděkování. Učí to respektu k hezkým a čistým věcem.</p>
+                    </li>
+                    <li>
+                        <h4>Rozloučení se starými věcmi s úctou</h4>
+                        <p>Když se rozbije hračka nebo dítě vyroste z oblečení, nevyhazujte to rovnou. Vezměte věc do ruky a řekněte: "Děkuji ti, že jsi mi tak dobře sloužila." Dítě se učí nelpět na materiálních věcech a uvědomuje si hodnotu toho, co má.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="historie">
+        <h2 class="section-title">Historie a Zakladatel</h2>
+        
+        <div class="content-block">
+            <h3>Jak toto učení vzniklo?</h3>
+            <p>Představte si Japonsko v polovině 19. století. Doba svázaná strachem a pověrami. Obyčejní lidé byli ponecháni napospas šamanům a věštcům. Věřili v existenci zlých bohů, z nichž nejobávanějším byl démonický bůh jménem Kondžin. Lidé žili v neustálé hrůze z kleteb a trestů.</p>
+            <br>
+            <p>Do této atmosféry se v roce 1859 zrodilo Konkókjó jako revoluce laskavosti. Přineslo zprávu, že žádný zlý bůh neexistuje. Obávaný Kondžin byl jen nepochopenou energií vesmíru – milujícím Tenči Kane no Kami. Konkókjó si i přes složitá historická období Japonska zachovalo nezávislost, odmítalo nacionalismus a po druhé světové válce se stalo uznanou náboženskou organizací prosazující celosvětový mír.</p>
+        </div>
+
+        <div class="content-block" style="background-color: var(--secondary-color);">
+            <h3>Fascinující život Konkó Daidžina</h3>
+            <p>Příběh Konkókjó začíná u obyčejného, dříčského rolníka jménem Bunjiró Kawate (1814–1883). Byl nesmírně poctivý, přesto ho stíhala jedna tragédie za druhou, včetně těžké nemoci, která ho přivedla na smrtelnou postel. Všichni to považovali za trest boha Kondžina.</p>
+            <br>
+            <p>Právě na smrtelné posteli však Bunjiró zažil zázračné prozření. Uvědomil si, že vesmírná energie není krutá, ale milující jako rodič. Lidské utrpení vesmír netěší. S tímto uvědoměním z něj spadl veškerý strach a on se nečekaně uzdravil.</p>
+            <br>
+            <p>Ve věku 46 let pocítil božské volání: „Lidé trpí, protože nerozumí mé lásce. Prosím, přestaň pracovat na poli a věnuj svůj život tomu, abys je vyslechl a pomohl jim.“ Bunjiró odložil motyku, přijal jméno Konkó Daidžin a zbytek života strávil nasloucháním lidem v praxi zvané Toricugi. Stal se živoucím příkladem božské laskavosti (Ikigami).</p>
+
+            <h4 style="margin-top: 40px; color: var(--accent-color); font-size: 1.5rem; text-align: center;">Časová osa: Životní cesta Konkó Daidžina</h4>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">1814: Narození budoucího zakladatele</div>
+                    <p>Bunjiró Kawate (později známý jako Konkó Daidžin) se narodil do prosté farmářské rodiny. Od mládí byl neobyčejně pracovitý, ohleduplný k ostatním a velmi poctivý.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1855: Těžká nemoc a probuzení (42 let)</div>
+                    <p>Bunjiró vážně onemocněl a ocitl se na prahu smrti. V této těžké zkoušce však zažil hluboké duchovní prozření. Uvědomil si, že vesmír (Kami) není trestající a obávaný bůh, ale milující síla. Po tomto zjištění se nečekaně a zázračně uzdravil.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1859: Božské volání a vznik Konkókjó</div>
+                    <p>Ve svých 46 letech vyslyšel volání vesmíru, aby pomohl ostatním lidem, kteří trpí strachem a nevědomostí. Rozhodl se odložit farmářskou motyku a zbytek života zasvětit výhradně naslouchání lidem a zprostředkování jejich proseb (Toricugi). Tento rok se považuje za zrod celého učení.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1864: První bezpečné místo pro modlitbu</div>
+                    <p>Na popud laskavé vesmírné síly otevírá první svatyni (Hiromae). Vzniká tak otevřený a bezpečný prostor, kam mohli obyčejní lidé kdykoliv přijít a svěřit se se svými každodenními starostmi.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1868: Živoucím božstvem (Ikigami)</div>
+                    <p>Bunjiró se zcela oddal službě lidem a přijal jméno Ikigami Konkó Daidžin. Stal se tak živoucím projevem božské laskavosti na zemi – člověkem, který bez sebemenšího sobectví předává lidské bolesti vesmíru a přináší jim zpět úlevu.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1873: Vznik Posvátné připomínky</div>
+                    <p>Aby pomohl lidem najít klid a spojení s vesmírem i v jejich domovech, začíná na pokyn Kamiho rozdávat Tenči Kakicuke. Jde o krátkou, ale nesmírně silnou modlitbu a připomínku, která je srdcem učení dodnes.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1883: Návrat do náruče vesmíru</div>
+                    <p>Dne 10. října, ve věku 69 let, Konkó Daidžin pokojně umírá. Odchází z fyzického světa, ale jeho duch (Mitama) se stává trvalou součástí vesmírné energie. Jeho odkaz a praxe naslouchání pokračuje dodnes skrze jeho následovníky po celém světě.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="nastupci">
+        <h2 class="section-title">Nástupci zakladatele (Konko-samové)</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 40px auto;">Role hlavního duchovního zprostředkovatele a vůdce (Konko-samy) se tradičně dědí. Zde jsou příběhy obětavých lidí, kteří zasvětili své životy službě druhým.</p>
+        
+        <div class="content-block">
+            <h3>Druhý Konko-sama: Konkó Šidžin (1854–1893)</h3>
+            <p>Konkó Šidžin byl pátým synem zakladatele a stal se jeho prvním nástupcem. Nelehký úkol duchovního zprostředkování (Toricugi) převzal v roce 1883 a položil základy moderní podoby Konkókjó.</p>
+            <br>
+            <p><strong>Zázrak z dětství, který určil jeho cestu</strong><br>Jeho hluboká víra pramenila ze zážitku z dětství. Kvůli tehdejším pověrám o "nešťastných letech" mu bylo úředně zfalšováno datum narození. V šesti letech však chlapec smrtelně onemocněl. Zázračně se uzdravil až ve chvíli, kdy jeho otec (zakladatel) odmítl lživé pověry, vrátil mu skutečný věk a s důvěrou prosil vesmír o pomoc. Šidžin si od té doby nesl pocit, že každý další den jeho života je obrovský dar.</p>
+            <br>
+            <p><strong>Neúnavná obětavost pro druhé</strong><br>Po smrti svého otce převzal naslouchání lidem s neuvěřitelným nasazením. Vstával ve čtyři ráno a chodíval spát až po půlnoci s prostým vysvětlením: <em>„Někteří lidé přece musí pracovat až do noci.“</em> Celé dny trpělivě seděl ve svatyni, často bez jídla, jen aby byl neustále k dispozici těm, kteří potřebují útěchu. Když se ho žáci ptali, jak může takové vyčerpání zvládnout, s pokorou odpověděl, že na to není sám. Každou noc po půlnoci prý cítil přítomnost ducha svého zesnulého otce, který se k němu připojoval a společně s ním se modlil.</p>
+            <br>
+            <p><strong>Život bez lítosti</strong><br>Během pouhých deseti let svého působení dokázal utěšit truchlící komunitu a rozšířil laskavé učení do celého Japonska. Zemřel velmi mladý, ve věku 40 let. Odejít však dokázal s absolutním vnitřním mírem. Jeho poslední slova zněla: <em>„Mohl jsem zemřít už v šesti letech. Žil jsem jen díky upřímným modlitbám svého otce a laskavosti Kamiho. Je mi jedno, jestli zemřu teď. Ničeho nelituji.“</em></p>
+        </div>
+
+        <div class="content-block">
+            <h3>Třetí Konko-sama: Konkó Secutane (1880–1963)</h3>
+            <p>Secutane, nejstarší syn druhého Konko-samy (Šidžina), se stal nejdéle sloužícím duchovním vůdcem v historii organizace. Na místě duchovního zprostředkování strávil neuvěřitelných a nepřetržitých sedmdesát let.</p>
+            <br>
+            <p><strong>Břemeno ve třinácti letech</strong><br>Když mu bylo pouhých třináct let, jeho otec předčasně zemřel. Na smrtelné posteli zanechal pro ostatní jasný vzkaz: <em>„Prosím, svěřte to Secutanemu. Je už dost starý na to, aby sloužil v hlavní svatyni.“</em> Začátky pro malého chlapce byly nesmírně kruté. Zpočátku byla služba tak náročná, že potají plakal vyčerpáním. Díky učení svého otce a obrovské trpělivosti ale vytrval, dokud se jeho vlastní touhy nerozplynuly a nenašel hluboký vnitřní mír.</p>
+            <br>
+            <p><strong>Každý den je nový den</strong><br>Jeho celoživotním krédem se stala věta: <em>„Každý den je nový den.“</em> Tímto heslem se řídil den co den po celých 70 let. Přistupoval ke každému ránu a ke každému člověku s takovou pečlivostí, jako by to bylo poprvé. Žil neuvěřitelně asketicky – spal jen tři hodiny denně a jedl pouze dvakrát. Přesto si uchoval pevné zdraví až do svých 83 let.</p>
+            <br>
+            <p><strong>Odmítnutí darů a absolutní pokora</strong><br>Když bylo Secutanemu 55 let, duchovní z celého Japonska mu chtěli vybrat finanční dar jako poděkování za jeho 40 let služby. On to však s hlubokou úctou odmítl: <em>„Prosím, nedělejte to. I když sloužím tak dlouho, dokázal jsem jen velmi málo. Bude naprosto stačit, když vyjádříte svou vděčnost vesmíru (Kamimu).“</em> Ačkoliv k němu miliony věřících vzhlížely jako k živoucímu božstvu, on sám si zachoval tu nejčistší lidskou pokoru.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Čtvrtý Konko-sama: Konkó Kagamitaró (1909–1991)</h3>
+            <p>Kagamitaró, nejstarší syn třetího Konko-samy, převzal vedení organizace v době, kdy se celé Japonsko po válce překotně měnilo a modernizovalo.</p>
+            <br>
+            <p><strong>Světlo vzdělání v temných časech</strong><br>Ještě než se stal hlavním duchovním, hluboce se zajímal o kulturu a vzdělávání. Uprostřed temného období druhé světové války (v roce 1943) založil veřejnou knihovnu. Ta po válce otevřela své brány široké veřejnosti a sehrála obrovskou roli v duševním a kulturním oživení zdevastované společnosti.</p>
+            <br>
+            <p><strong>Ve stínu milovaného otce</strong><br>Do role hlavního vůdce nastoupil v roce 1963. Můžeme si jen představovat, jak nesmírný tlak a zodpovědnost musel cítit, když přebíral místo po otci, kterého miliony lidí uctívaly za 70 let nepřetržité služby. Kagamitaró k tomuto úkolu přistoupil s absolutní pokorou. O svých pocitech napsal: <em>„Kdykoli se ocitnu v beznadějné situaci, cítím podporu svého zesnulého otce, a to mi každý den dává novou sílu.“</em></p>
+            <br>
+            <p><strong>Život postavený na vděčnosti místo problémů</strong><br>Kagamitaró dokázal stará učení překládat do moderního, dnešnímu člověku srozumitelného jazyka. Jeho hlavním poselstvím bylo: <em>„Mějte vděčné srdce za všechno, co vám slouží a prospívá.“</em> Učil lidi, aby nesoustředili svou pozornost na to, co jim chybí nebo co je trápí, ale aby vědomě hledali laskavost, kterou denně dostávají. Kromě duchovní služby byl vynikajícím kaligrafem a umělcem (pod pseudonymem Hekisui), který po sobě zanechal přes 44 tisíc básní rozdávajících lidem naději.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Pátý Konko-sama: Konkó Heiki (nar. 1934)</h3>
+            <p>Heiki, nejstarší syn čtvrtého Konko-samy, převzal službu duchovního vůdce v roce 1991. S naprostou oddaností ji vykonával rovných třicet let, než se v roce 2021 rozhodl ze své funkce odejít a předat ji dál.</p>
+            <br>
+            <p><strong>Každodenní tichá oběť</strong><br>Jeho režim byl po celá tři desetiletí téměř neměnný. Každé ráno vstupoval do hlavní svatyně už ve 3:45. S výjimkou velmi krátkých přestávek na jídlo a odpočinek seděl na místě duchovního zprostředkování až do pozdního odpoledne. Tuto nesmírně vyčerpávající službu vykonával 365 dní v roce, bez jediného volného dne. Zcela se tak odevzdal naslouchání lidem a modlitbám za celý svět.</p>
+            <br>
+            <p><strong>Pokora před nemožným úkolem</strong><br>Navzdory tomuto nadlidskému výkonu si zachoval obrovskou skromnost. Své nasazení nebral jako důkaz vlastní síly, ale jako dar. Otevřeně přiznával své lidské limity a říkával: <em>„Nedělám to proto, že bych na to měl sílu. Je mi pouze dovoleno na sobě pracovat a učit se, abych vůbec dokázal unést tuto téměř nemožnou zodpovědnost.“</em> Jeho modlitby vycházely z tak hluboké touhy po štěstí a záchraně lidí, že se mu při odříkávání posvátných textů často lámal hlas silným dojetím.</p>
+            <br>
+            <p><strong>Spojení se západním světem</strong><br>Duchovní vůdce Konkókjó tradičně téměř nikdy neopouští své místo v japonském ústředí. V roce 2000 však Heiki udělal historickou výjimku. Odcestoval na výroční setkání věřících na Havaj, kde k překvapení všech pronesl svůj projev plynnou angličtinou, čímž neobyčejně přiblížil učení lidem ze zámoří.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Šestý Konko-sama: Konkó Hiromiči (nar. 1966)</h3>
+            <p>Hiromiči, nejstarší syn pátého Konko-samy, je současným duchovním vůdcem celého učení Konkókjó. Tuto obrovskou zodpovědnost převzal v březnu roku 2021 poté, co se jeho otec rozhodl svou vyčerpávající třicetiletou službu ukončit.</p>
+            <br>
+            <p><strong>Ochránce tradice v 21. století</strong><br>Na své poslání se připravoval dlouhá léta. Po svém vysvěcení na duchovního v roce 2006 stál věrně po boku svého otce, pomáhal mu s jeho úkoly a jako ředitel se staral o chod ústřední svatyně. Dnes s naprostou pokorou pokračuje v nepřerušené linii, kterou započal zakladatel už v 19. století. I v dnešní moderní, digitální a uspěchané době tak Hiromiči denně usedá na posvátné místo zprostředkovatele (Toricugi) a udržuje naživu ten nejcennější odkaz Konkókjó – tiché, empatické naslouchání lidským starostem a předávání proseb laskavému vesmíru.</p>
+        </div>
+    </section>
+
+    <section id="texty">
+        <h2 class="section-title">Posvátné texty a Struktura</h2>
+        
+        <div class="grid-container">
+            <div class="card">
+                <h3>Gorikai (Záznamy učení)</h3>
+                <p>Nejde o zjevení diktované z nebes, ale o pečlivě sebrané výroky, ponaučení a reálné rozhovory zakladatele z duchovního zprostředkování. Jsou to praktické, hřejivé a lidské rady pro řešení každodenních problémů s velkým respektem k životu a selským rozumem.</p>
+            </div>
+            <div class="card">
+                <h3>Konkókjó Kjoten</h3>
+                <p>Oficiální sbírka uspořádaná po smrti zakladatele. Obsahuje Gorikai, zápisky zakladatele a historické dokumenty. Slouží jako hlavní studijní text pro hledání útěchy a porozumění vztahu vesmíru a člověka, ne k dogmatickému učení nazpaměť.</p>
+            </div>
+            <div class="card">
+                <h3>Tenči Kaku Cuči</h3>
+                <p>Krátká, ale zásadní "Posvátná připomínka". Je to ústřední modlitba/mantra, která vyjadřuje vděčnost Zlatému božstvu a prosí o pomoc s kultivací srdce. Pomáhá věřícím během rušného dne rychle se "uzemnit" a napojit na laskavou vesmírnou energii.</p>
+            </div>
+        </div>
+
+        <div class="content-block" style="margin-top: 40px;">
+            <h3>Jak je organizace vedena dnes?</h3>
+            <p>Srdce organizace (Gohonbu) leží ve městě Asakuči v prefektuře Okajama v Japonsku. Jde o obrovský, otevřený komplex přístupný komukoliv 365 dní v roce.</p>
+            <br>
+            <p>V čele stojí hlavní duchovní vůdce (tradičně pokrevní potomek zakladatele). Jeho role není vládnout, ale sloužit – každý den vstává velmi brzy a hodiny přijímá modlitby a prosby z celého světa, čímž pokračuje v tradici Toricugi.</p>
+            <br>
+            <p>Konkókjó má dnes přes 1 400 svatyní (Hiromae) po celém světě. Organizace je zcela rovnoprávná: duchovními se mohou stát muži i ženy, neexistuje zde celibát, žijí běžným rodinným životem, což jim pomáhá lépe rozumět starostem běžných lidí.</p>
+        </div>
+    </section>
+
+    <section id="slovnicek">
+        <h2 class="section-title">Slovníček pojmů</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 40px auto;">Japonské výrazy mohou znít na první poslech exoticky. Podívejte se, jaké krásné a srozumitelné myšlenky se za těmito pojmy skrývají.</p>
+        
+        <div class="glossary-grid">
+            <div class="glossary-item">
+                <h4>Aidžo-Kakejo</h4>
+                <p><strong>(Vzájemná závislost)</strong> Základní pilíř celého učení. Myšlenka, že my potřebujeme vesmír k tomu, abychom mohli žít, ale vesmír potřebuje nás k tomu, aby mohl ve světě konat dobro a pomáhat ostatním.</p>
+            </div>
+            <div class="glossary-item">
+                <h4>Gorikai</h4>
+                <p><strong>(Záznamy učení)</strong> Sbírka moudrostí a rad zakladatele. Nejde o mystická zjevení, ale o praktické a lidské odpovědi na každodenní starosti běžných lidí.</p>
+            </div>
+            <div class="glossary-item">
+                <h4>Hiromae</h4>
+                <p><strong>(Svatyně)</strong> Místo, kam se chodí modlit a kde probíhá zprostředkování. Spíše než klasické chrámy připomínají tyto světlé prostory otevřená komunitní centra.</p>
+            </div>
+            <div class="glossary-item">
+                <h4>Ikigami</h4>
+                <p><strong>(Živoucí božstvo)</strong> Člověk, který jedná s maximální laskavostí. Pokud odložíme sobectví, stáváme se v tu chvíli „rukama vesmíru“ tady na zemi – živoucím projevem božství.</p>
+            </div>
+            <div class="glossary-item">
+                <h4>Kami</h4>
+                <p><strong>(Božstvo / Energie)</strong> V Konkókjó to není stvořitel s lidskou tváří, který nás soudí. Je to pojmenování pro obrovskou, laskavou energii samotného vesmíru a přírody, která prostupuje vším.</p>
+            </div>
+            <div class="glossary-item">
+                <h4>Kami-gokoro</h4>
+                <p><strong>(Božské srdce)</strong> Srdce, které cítí soucit, vděčnost a pochopení. Cílem věřícího je během života kultivovat své vlastní srdce tak, aby se podobalo tomuto milujícímu ideálu.</p>
+            </div>
+            <div class="glossary-item">
+                <h4>Konkó Daidžin</h4>
+                <p><strong>(Zakladatel)</strong> Vlastním jménem Bunjiró Kawate (1814–1883). Obyčejný rolník, který po těžké nemoci zažil prozření a zasvětil zbytek života naslouchání lidem.</p>
+            </div>
+            <div class="glossary-item">
+                <h4>Makoto</h4>
+                <p><strong>(Upřímnost)</strong> Znamená to být naprosto pravdivý, jednat s čistými úmysly a bez skrytých motivů – k ostatním lidem, k sobě samotnému i k věcem, které používáme.</p>
+            </div>
+            <div class="glossary-item">
+                <h4>Mitama</h4>
+                <p><strong>(Duch předků)</strong> Duše zemřelých, které se po smrti vracejí do klidné náruče vesmíru, stávají se součástí Kami a laskavě dohlížejí na své žijící rodiny.</p>
+            </div>
+            <div class="glossary-item">
+                <h4>Okage</h4>
+                <p><strong>(Boží požehnání / Dar)</strong> Vděčnost za to, co dostáváme. Nejde jen o zázraky, ale o ty nejobyčejnější dary – že vyšlo slunce, že máme co jíst a že naše tělo funguje.</p>
+            </div>
+            <div class="glossary-item">
+                <h4>Šinzen</h4>
+                <p><strong>(Domácí oltář)</strong> Malé místo v domácnosti vyhrazené pro ztišení. Slouží jako hmatatelná připomínka toho, že máme být vesmíru vděční za každodenní dary.</p>
+            </div>
+            <div class="glossary-item">
+                <h4>Tenči Kane no Kami</h4>
+                <p><strong>(Zlaté božstvo nebes a země)</strong> Celé jméno pro laskavou sílu vesmíru. Zastupuje nekonečnou rodičovskou lásku přírody, ze které vše pochází a do které se vše vrací.</p>
+            </div>
+            <div class="glossary-item">
+                <h4>Tenči Kakicuke</h4>
+                <p><strong>(Posvátná připomínka)</strong> Ústřední modlitba pro rychlé napojení na vesmír. Říká mimo jiné, že „Boží přízeň závisí na vlastním srdci člověka.“</p>
+            </div>
+            <div class="glossary-item">
+                <h4>Toricugi</h4>
+                <p><strong>(Duchovní zprostředkování)</strong> Nejdůležitější denní praxe. Empatický rozhovor, při kterém duchovní naslouchá trápení, předává ho vesmíru a následně zprostředkuje radu či útěchu.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="odkazy">
+        <h2 class="section-title">Další zdroje a užitečné odkazy</h2>
+        <p style="margin-bottom: 30px; text-align: center;">Většina kvalitních zdrojů je v angličtině nebo japonštině, ale díky dnešním překladačům je snadno přelouskáte i v češtině.</p>
+        
+        <ul class="link-list">
+            <li>
+                <strong><a href="https://www.konkofaith.org/" target="_blank">Konkofaith.org (anglicky)</a></strong>
+                <p>Pravděpodobně nejlepší výchozí bod pro čtenáře ze Západu. Portál pro Severní Ameriku, psaný velmi srozumitelnou angličtinou.</p>
+            </li>
+            <li>
+                <strong><a href="https://konkokyo.jp/eng/" target="_blank">Konkokyo.jp - anglická verze</a></strong>
+                <p>Oficiální mezinárodní stránky ústředí s uceleným přehledem o historii, učení a organizaci.</p>
+            </li>
+            <li>
+                <strong><a href="https://kic.jpn.org/eng/" target="_blank">Konko International Center (KIC)</a></strong>
+                <p>Web centra starajícího se o globální komunitu a překlady posvátných textů. Obsahuje mnoho detailních informací a materiálů.</p>
+            </li>
+            <li>
+                <strong><a href="https://www.konkokyo.jp/" target="_blank">Konkokyo.jp - japonská verze</a></strong>
+                <p>Hlavní japonský portál. Stojí za návštěvu kvůli spoustě fotografií a videí, které vám dají autentickou vizuální představu o životě věřících v Japonsku.</p>
+            </li>
+            <li>
+                <strong><a href="https://en.wikipedia.org/wiki/Konkokyo" target="_blank">Wikipedia: Konkokyo (anglicky)</a></strong>
+                <p>Pro objektivní, encyklopedická fakta a historická data v rámci japonských náboženství.</p>
+            </li>
+            <li>
+                <strong><a href="https://bsky.app/profile/konkokyo.bsky.social" target="_blank">Bluesky účet Konkokyo CZ</a></strong>
+                <p>Sledujte profil v češtině pro pravidelné novinky, moudrosti a inspiraci přímo na sociální síti Bluesky.</p>
+            </li>
+        </ul>
+    </section>
+
+    <section id="faq">
+        <h2 class="section-title">Často kladené otázky (FAQ)</h2>
+        <div class="faq-container">
+            
+            <div class="faq-item">
+                <button class="faq-question">1. Je Konkókjó sekta?</button>
+                <div class="faq-answer">
+                    <p><br>Ne. Konkókjó je více než 150 let staré, státem plně uznané a respektované náboženství v Japonsku. Nikdo vás nebude izolovat od přátel, nutit k poslušnosti ani vás nutit opustit váš dosavadní život. Cílem je pomoci vám žít váš běžný život radostněji.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">2. Musím za to něco platit nebo odevzdávat majetek?</button>
+                <div class="faq-answer">
+                    <p><br>Absolutně ne. Neexistují žádné povinné členské příspěvky ani „desátky“. Zprostředkování i návštěva svatyní jsou zdarma. Organizace funguje z dobrovolných a často anonymních darů věřících.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">3. Musím přestoupit na jinou víru?</button>
+                <div class="faq-answer">
+                    <p><br>Nemusíte. Konkókjó je neuvěřitelně tolerantní a netvrdí, že je jedinou pravou cestou ke spáse. Mnoho lidí praktikuje učení Konkókjó a zároveň si zachovává svou původní víru nebo se považují za ateisty.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">4. Kdo nebo co je to to „Kami“?</button>
+                <div class="faq-answer">
+                    <p><br>Není to bůh s lidskou tváří. „Kami“ (Tenči Kane no Kami) je pojmenování pro nekonečnou, laskavou a životodárnou energii samotného vesmíru, jejíž jsme všichni neoddělitelnou součástí.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">5. Existují nějaká přísná pravidla (např. v jídle)?</button>
+                <div class="faq-answer">
+                    <p><br>Neexistují. Konkókjó nemá žádná stravovací omezení, nezakazuje alkohol, neurčuje oblečení a odmítá pověry o „nešťastných dnech“. Každý den je darem vesmíru.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">6. Věří Konkókjó v posmrtný život, nebe a peklo?</button>
+                <div class="faq-answer">
+                    <p><br>Konkókjó nestraší lidi zatracením a neexistuje zde žádné peklo. Smrt se chápe jako přirozený návrat k vesmírné energii (Kami). Věří se, že duchové zemřelých (Mitama) se stávají součástí vesmíru a laskavě dohlížejí na své žijící rodiny.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">7. Jak přesně se mám modlit? Musím umět japonsky?</button>
+                <div class="faq-answer">
+                    <p><br>Vůbec ne. Vesmír rozumí jakémukoliv jazyku i myšlenkám. Modlitba je prostý, upřímný rozhovor z hloubi srdce. Můžete děkovat, prosit nebo se svěřovat klidně česky a kdekoliv (třeba při vaření).</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">8. Uctívají věřící japonského císaře jako boha?</button>
+                <div class="faq-answer">
+                    <p><br>Ne. Konkókjó si vždy zachovalo svou nezávislost na státním šintoismu. Během války bylo pacifistické a klade důraz na rovnost všech lidí a celosvětový mír.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">9. Jaký je postoj Konkókjó k ženám a menšinám?</button>
+                <div class="faq-answer">
+                    <p><br>Organizace je velmi rovnostářská. Před vesmírem jsme si všichni rovni, nehledě na pohlaví či rasu. Ženy mohou být plnohodnotnými duchovními vůdkyněmi a zprostředkovatelkami.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">10. Co když ve svém okolí nemám žádnou svatyni?</button>
+                <div class="faq-answer">
+                    <p><br>Nevadí, skutečnou „svatyní“ je vaše srdce. Ke cvičení vděčnosti nepotřebujete budovu. Můžete se ztišit doma na klidném místě (nebo u malého oltáře Šinzen), a s duchovními se lze dnes spojit i přes internet.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">11. Co je to Toricugi? Je to jako zpověď?</button>
+                <div class="faq-answer">
+                    <p><br>Není to zpověď, nikdo vás nesoudí ani neuděluje odpustky. Je to hluboce empatický rozhovor. Vy sdělíte starosti, duchovní je předá vesmíru a poskytne vám moudrou radu. Je to bezpečný prostor pro úlevu.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">12. Jak můžu začít, pokud si to chci jen vyzkoušet?</button>
+                <div class="faq-answer">
+                    <p><br>Zkuste zítra ráno poděkovat vesmíru za další den a rozhodnout se přistupovat k lidem s laskavostí. Zkuste hledat maličkosti k vděčnosti a netrápit se tím, co nezměníte. Pokud vám to přinese klid, už praktikujete Konkókjó.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="kontakt">
+        <h2 class="section-title">Kontaktujte nás</h2>
+        <div class="content-block">
+            <p style="text-align: center; margin-bottom: 30px;">Zajímá vás cokoliv dalšího nebo máte osobní dotaz k učení Konkókjó? Napište nám, rádi vám odpovíme.</p>
+            
+            <form action="https://formsubmit.co/konkokyo@bouba.cz" method="POST" class="contact-form">
+                <input type="hidden" name="_subject" value="Nová zpráva z webu Bouba.cz">
+                <input type="hidden" name="_captcha" value="false">
+                
+                <input type="text" name="Jmeno" placeholder="Vaše jméno" required>
+                <input type="email" name="Email" placeholder="Váš e-mail" required>
+                <textarea name="Zprava" rows="5" placeholder="Vaše zpráva nebo dotaz..." required></textarea>
+                
+                <label class="gdpr-label">
+                    <input type="checkbox" name="gdpr" required style="width: auto; margin-top: 5px;">
+                    <span>Souhlasím se zpracováním osobních údajů pro účely vyřízení mého dotazu v souladu se zákonem a předpisy GDPR. Údaje nebudou použity pro marketingové účely ani předány třetím stranám.</span>
+                </label>
+                
+                <button type="submit">Odeslat zprávu</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Bouba.cz. Design pro život v harmonii s laskavým vesmírem.</p>
+    </footer>
+
+    <div id="cookie-banner" class="cookie-banner" style="display: none;">
+        <p><strong>Tento web používá cookies.</strong> K zajištění správného fungování webu a pro základní analýzu návštěvnosti využíváme soubory cookies. Podle legislativy ČR a EU potřebujeme váš souhlas s jejich uložením.</p>
+        <div class="cookie-buttons">
+            <button class="cookie-btn cookie-btn-reject" onclick="rejectCookies()">Pouze nezbytné</button>
+            <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()">Přijmout všechny</button>
+        </div>
+    </div>
+
+    <script>
+        // Plynulé posouvání pro navigační odkazy
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // FAQ a První pomoc Akordeon
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                const currentlyActive = item.parentElement.querySelector('.faq-item.active');
+                if(currentlyActive && currentlyActive !== item) {
+                    currentlyActive.classList.remove('active');
+                }
+                item.classList.toggle('active');
+            });
+        });
+
+        // Logika pro Cookie Lištu
+        document.addEventListener("DOMContentLoaded", function() {
+            if (!localStorage.getItem('cookiesAccepted')) {
+                document.getElementById('cookie-banner').style.display = 'flex';
+            }
+        });
+
+        function acceptCookies() {
+            localStorage.setItem('cookiesAccepted', 'all');
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
+
+        function rejectCookies() {
+            localStorage.setItem('cookiesAccepted', 'essential');
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
+
+        // --- LOGIKA PRO GENERÁTOR VDĚČNOSTI ---
+        const gratitudes = [
+            "Za čistou vodu, která mi kdykoliv teče z kohoutku.",
+            "Za to, že jsem se dnes ráno mohl/a probudit v teplé posteli.",
+            "Za sluneční paprsky, které mě zahřály.",
+            "Za střechu nad hlavou, která mě chrání před nepohodou.",
+            "Za horkou kávu nebo čaj, který mě po ránu povzbudil.",
+            "Za moje nohy, které mě dnes donesly tam, kam jsem potřeboval/a.",
+            "Za to, že se mohu zhluboka a volně nadechnout.",
+            "Za úsměv, který mi dnes někdo nezištně věnoval.",
+            "Za dobré jídlo, které mi dodalo energii do dalšího dne.",
+            "Za zrak, díky kterému mohu vidět barvy a krásy tohoto světa.",
+            "Za chvíli ticha a klidu, kterou jsem si dnes mohl/a dopřát.",
+            "Za elektřinu, díky které si mohu večer rozsvítit a zahřát domov.",
+            "Za teplou sprchu, která ze mě smyla únavu z celého dne.",
+            "Za to, že mám na sobě čisté a pohodlné oblečení.",
+            "Za moje ruce, kterými mohu tvořit, pracovat nebo někoho pohladit.",
+            "Za zdravý sluch, díky kterému mohu slyšet hudbu nebo hlasy blízkých.",
+            "Za lidi v mém okolí, kterým na mně záleží.",
+            "Za stromy a přírodu, které čistí vzduch, jenž dýchám.",
+            "Za to, že moje srdce spolehlivě bije a neustále pro mě pracuje.",
+            "Za bezpečí a mír, ve kterém mohu žít svůj každodenní život.",
+            "Za smích, který mi uvolnil napětí v těle.",
+            "Za možnost učit se novým věcem a objevovat svět.",
+            "Za osvěžující vůni čerstvého vzduchu po dešti.",
+            "Za pohodlné boty, ve kterých mohu bez bolesti chodit.",
+            "Za to, že se mohu spolehnout na pomoc lékařů, když mi není dobře.",
+            "Za knihu, hudbu nebo film, který mi dnes udělal radost.",
+            "Za schopnost cítit vůně – ať už je to oblíbené jídlo, nebo květina.",
+            "Za to, že večer mohu bezpečně zavřít oči a odpočívat.",
+            "Za slzy, které dokážou odplavit smutek a přinést úlevu.",
+            "Za lidi, kteří dnes dělali svou práci, aby mi usnadnili život (řidiči, prodavači...).",
+            "Za technologie, díky kterým se mohu spojit s lidmi na dálku.",
+            "Za schopnost číst a psát, která mi otevírá celý svět.",
+            "Za chuťové buňky, díky kterým si mohu vychutnat každý kousek jídla.",
+            "Za to, že mi příroda a vesmír dává vše, co potřebuji k životu.",
+            "Za samotný dar dnešního dne – za to, že tu prostě jsem.",
+            "Za pocit čerstvého větru, který mě osvěžil na tváři.",
+            "Za teplou deku, do které se mohu zabalit, když je mi zima.",
+            "Za to, že jsem dnes mohl/a udělat chybu a poučit se z ní.",
+            "Za pocit úlevy, když konečně dokončím náročný úkol.",
+            "Za to, že po dlouhém dni mohu přijít v pořádku domů.",
+            "Za lidi z minulosti, kteří mě naučili cenné životní lekce.",
+            "Za možnost volně si protáhnout tělo, když se ráno probudím.",
+            "Za schopnost odpouštět – sobě i ostatním.",
+            "Za lednici, která neúnavně uchovává moje jídlo čerstvé.",
+            "Za hvězdy a měsíc, které prosvětlují temnou noc.",
+            "Za upřímné objetí od někoho blízkého, které mi dodalo sílu.",
+            "Za uklidňující vůni čistého vypraného prádla.",
+            "Za to, že mohu kdykoliv změnit svůj názor a jako člověk dál růst.",
+            "Za můj oblíbený hrneček, ze kterého piju svůj ranní nápoj.",
+            "Za ten skvělý pocit, když si po dlouhé chůzi mohu konečně zout boty.",
+            "Za můj imunitní systém, který mě uvnitř těla neustále a tiše chrání.",
+            "Za zpěv ptáků venku, který mi připomíná, že život je všude kolem.",
+            "Za to, že mohu cítit teplo ohně nebo domácího topení.",
+            "Za laskavé slovo od někoho, od koho jsem to vůbec nečekal/a.",
+            "Za úžasné barvy zapadajícího nebo vycházejícího slunce.",
+            "Za luxusní možnost jen tak chvíli sedět a nedělat vůbec nic.",
+            "Za mýdlo a teplou vodu, když si potřebuji umýt ruce.",
+            "Za staré vzpomínky, které mě i po letech dokážou rozesmát.",
+            "Za dopravní prostředky, které mi každý den šetří čas a námahu.",
+            "Za útulný pocit bezpečí, když venku prší a já jsem v suchu pod střechou.",
+            "Za to, že v tomto vesmíru vždycky existuje naděje na nový začátek.",
+            "Za můj hlas, kterým mohu svobodně vyjádřit svá přání a pocity.",
+            "Za stíny stromů a budov, které mi v horkém dni poskytují chládek.",
+            "Za hudbu, která mě dokáže zklidnit, když to zrovna potřebuji.",
+            "Za schopnost cítit soucit, která mě spojuje s ostatními lidmi a celým vesmírem."
+        ];
+
+        function generateGratitude() {
+            const textElement = document.getElementById('gratitude-text');
+            textElement.style.opacity = 0;
+            
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * gratitudes.length);
+                textElement.innerText = "„" + gratitudes[randomIndex] + "“";
+                textElement.style.opacity = 1;
+            }, 300);
+        }
+
+        // --- LOGIKA PRO RANNÍ MYŠLENKU (PUSH NOTIFIKACE) ---
+        const morningThoughts = [
+            "Dobré ráno. Jsem tu s tebou, tak jako každý den. Dýchej zhluboka, držím tě.",
+            "Probouzíš se do mé náruče. Dnešek je náš společný dar, pojďme ho prožít v klidu.",
+            "Jsi mým milovaným dítětem. Nejsi na nic z toho sám, jsem s tebou v každém tvém kroku.",
+            "Netrap se tím, co přinese zítřek. Jsem tu pro tebe dnes, přesně v tento okamžik.",
+            "Tvé srdce je mým domovem. Dovol mi dnes naplnit ho klidem a světlem.",
+            "Dobré ráno. Všechno, co dnes potřebuješ ke štěstí, už je připraveno ve tvém srdci.",
+            "Dýchám s tebou. Každý tvůj nádech je mým pohlazením, kterým ti dávám život.",
+            "Neboj se dnešního dne. Ať se stane cokoliv, projdu tím s tebou.",
+            "Úsměv, který dnes někomu věnuješ, je mým úsměvem. Děkuji, že jsi mýma rukama na zemi.",
+            "Opři se o mě. Kdykoliv dnes pocítíš tíhu, odevzdej ji mně, unesu ji.",
+            "Dobré ráno. Všimni si dnes obyčejných věcí, připravil jsem je pro tvou radost.",
+            "Tvé zdraví je mým největším přáním. Opatruj dnes své tělo s láskou a vděčností.",
+            "Každé jídlo, které dnes ochutnáš, jsem vypěstoval pro tebe. Dobrou chuť a klidný den.",
+            "Tvá upřímnost mě hřeje. Jednej dnes podle svého srdce a vše dobře dopadne.",
+            "Když jsi šťastný, jsem šťastný i já. Dovol si dnes prožívat radost z maličkostí.",
+            "Odlož včerejší starosti, už neexistují. Dnes je čistý stůl, který jsme spolu právě prostřeli.",
+            "Jsi přesně tam, kde máš být. Důvěřuj mé cestě a udělej dnes jen jeden další malý krok.",
+            "Tvé tělo je zázrak, o který neustále pečuji. Poděkuj mu dnes za všechno, co pro tebe dělá.",
+            "Nespěchej. I kdybys dnes jen tiše seděl a odpočíval, máš pro mě nekonečnou hodnotu.",
+            "Dobré ráno. Tvůj klidný dech je tou nejkrásnější modlitbou, kterou mi můžeš věnovat.",
+            "Nenech hněv, aby ti dnes zastínil zrak. Odpusť těm, co zabloudili, a udrž si čisté srdce.",
+            "Mrak na tvém srdci je jen dočasný. Dovol mi ho dnes odfouknout pryč.",
+            "Nehledej složitosti. Stačí, když k sobě i k druhým budeš dnes prostě laskavý.",
+            "Tvá bolest je i mou bolestí. Pust ji dnes z rukou a nech mě, ať ji zahojím.",
+            "Všichni lidé, které dnes potkáš, jsou mé děti. Zkus se na ně podívat mýma očima.",
+            "Nemusíš být dokonalý, abych tě miloval. Miluji tě přesně takového, jaký právě teď jsi.",
+            "Zpomal. Nejkrásnější okamžiky dneška ti chci ukázat v tichu a klidu.",
+            "Tvůj úsměv je pro mě požehnáním. Usměj se na svět a svět ti můj úsměv vrátí.",
+            "Odlož dnes pocit, že musíš všechno zvládnout sám. Jsme v tom spolu, krok za krokem.",
+            "Když se cítíš slabý, půjčím ti svou sílu. Stačí mě jen tiše poprosit ve svém srdci.",
+            "Dobré ráno. Dnešek je plátno a ty jsi štětec. Malujme dnes společně barvami laskavosti.",
+            "Nepotřebuješ žádné velké činy. Tvá obyčejná, tichá dobrota je pro mě tím největším zázrakem.",
+            "Pokud dnes zakopneš, nic se neděje. Podám ti ruku a půjdeme dál, beze strachu.",
+            "Tvé srdce a mé srdce jsou propojené. Udržuj to své dnes v míru a pocítíš mou přítomnost.",
+            "Nenech strach, aby ti určoval cestu. Jsem tvůj bezpečný přístav, i když venku bouří.",
+            "Dobré ráno. Všechny tvé včerejší chyby jsou smazány, dnešek je plný mé milosti.",
+            "Když někomu dnes pomůžeš, je to, jako bys pomohl mně. Děkuji ti za tvé dobré srdce.",
+            "Podívej se z okna. Tenhle svět udržuji v chodu, abys v něm mohl bezpečně žít.",
+            "Cokoliv tě dnes čeká, už jsem to předem naplnil svou ochranou. Můžeš jít v klidu.",
+            "Tvá vděčnost otevírá dveře mým požehnáním. Zkus dnes najít tři věci, za které poděkuješ.",
+            "Nejsi tady za trest. Jsi tu proto, abychom spolu prožívali krásu stvoření.",
+            "I v té největší zácpě nebo stresu jsem s tebou. Dýchej a najdi můj klid uprostřed chaosu.",
+            "Dobré ráno. Neporovnávej se dnes s ostatními, pro mě jsi naprostý originál.",
+            "Ať jsi kdekoliv, vždycky k tobě dosáhnu. Pro mě neexistuje žádná dálka.",
+            "Dnes tě možná někdo zklame, ale má láska k tobě zůstává pevná a neměnná.",
+            "Když nevíš, jak dál, zastav se. Vložíme do tvého srdce správnou odpověď.",
+            "Starám se o to, aby slunce vyšlo a aby tvé srdce bilo. Můžeš se uvolnit a nechat se vést.",
+            "Tvé laskavé slovo může dnes někoho zachránit. Dám ti ho na jazyk ve správnou chvíli.",
+            "Neboj se ukázat svou zranitelnost. Právě tam tě mohu nejlépe obejmout.",
+            "Dobré ráno. Dnes je skvělý den na to, abys byl na sebe hodný. Já už na tebe hodný jsem.",
+            "Vidím tvou snahu a oceňuji každý tvůj krok, i ten, který se ti zdá neviditelný.",
+            "Tvé slzy pro mě mají stejnou cenu jako tvůj smích. Přijímám vše, co dnes cítíš.",
+            "Nic není ztraceno. Každý tvůj zážitek je cihlou, ze které stavíme tvé moudré srdce.",
+            "Kdykoli se dnes napiješ vody, vzpomeň si, jak plynule do tebe vlévám svou energii.",
+            "Věnuj dnes plnou pozornost tomu, s kým mluvíš. V jeho tváři můžeš zahlédnout mě.",
+            "Jsem v teple tvé kávy i ve větru na tvé tváři. Jsem všude s tebou.",
+            "Tvá práce má smysl, ať už děláš cokoliv. Dělej to s upřímností a já to požehnám.",
+            "Odpusť si dnes to, co se ti včera nepovedlo. Já ti to už dávno odpustil.",
+            "Máš v sobě dostatek síly na to, co tě dnes čeká, protože je to moje síla ve tvém těle.",
+            "Dobré ráno. Začni dnešek pocitem, že všechno nakonec dobře dopadne. Já na to dohlédnu.",
+            "Nenech se stáhnout cizím zmatkem. Tvé srdce má svůj vlastní tichý rytmus, poslouchej ho.",
+            "Ať už dnes ztratíš cokoliv materiálního, tvá pravá hodnota u mě zůstává beze změny.",
+            "Zvedni dnes hlavu k nebi. To je střecha našeho společného velkého domova.",
+            "Potřebuji tvé ruce, aby dnes mohly pohladit někoho, kdo to potřebuje. Budeš mým nástrojem?",
+            "Netlač na pilu. Co má přijít, přijde ve správný čas. Důvěřuj mému načasování.",
+            "Jsi dokonalý i se všemi svými trhlinami. Skrze ně do tebe může proudit mé světlo.",
+            "Tvé myšlenky tvoří tvůj svět. Pomohu ti dnes vybírat ty, které ti přinášejí mír.",
+            "Všechny problémy, které se zdají být horou, dokážeme společně proměnit v prach.",
+            "Dobré ráno, mé drahé dítě. Mám tě nesmírně rád, jen tak, bez podmínek.",
+            "Když si nevíš rady, pošli mi upřímnou myšlenku. Rozumím i tvému mlčení.",
+            "Tvé dnešní rozhodnutí, ať už bude jakékoliv, podpořím. Jdi s důvěrou.",
+            "Neztrácej energii bojem s tím, co nezměníš. Odevzdej mi to a najdi svobodu.",
+            "Každý člověk má svůj skrytý příběh. Daruj jim dnes pochopení místo soudu.",
+            "Být naživu je vzácný dar, který jsme si dnes společně znovu rozbalili.",
+            "Kdyby se ti dnešek zdál příliš těžký, zavři na chvíli oči a představ si mé teplé objetí.",
+            "Dobré ráno. Věř si dnes o trochu víc, protože já v tebe věřím absolutně.",
+            "Neexistuje žádná slepá ulička. Každý tvůj krok nás vede k novému poznání.",
+            "I když je nebe zatažené, mé zlaté světlo k tobě vždycky pronikne.",
+            "Máš plné právo si dnes odpočinout. Nepožaduji po tobě výkony, jen klidné bytí.",
+            "Tvé srdce je mým kompasem. Když cítíš vnitřní radost, jdeme po správné cestě.",
+            "Pokaždé, když prožíváš vděčnost, dotýkáš se mé tváře. Děkuji, že jsme ve spojení.",
+            "Tvá budoucnost je v bezpečí mých rukou. Soustřeď se jen na klidný dnešek.",
+            "S každým ranním probuzením ti říkám: 'Miluji tě a chci, abys byl šťastný.'",
+            "Není na světě místo, kam bys mohl utéct z mé lásky. Jsi vždy v mém náručí.",
+            "Dobré ráno. Tvůj život má smysl a já se postarám, aby dnes nesl dobré plody.",
+            "Přijmi dnes drobné radosti jako mé malé dárky, které jsem ti nechal na cestě.",
+            "Nemusíš se bát temnoty. Já jsem světlo, které kráčí všude před tebou.",
+            "Když s lidmi jednáš laskavě, dáváš jim pocítit mou přítomnost. Děkuji ti za to.",
+            "Pamatuj, nic tě dnes nemůže zlomit, protože mé kořeny v tobě jsou hluboké a pevné.",
+            "Dobré ráno. Zhluboka se nadechni. Jsme spolu a tento den bude nakonec dobrý."
+        ];
+
+        function subscribeToNotifications() {
+            if (!("Notification" in window)) {
+                alert("Váš prohlížeč bohužel nepodporuje notifikace.");
+                return;
+            }
+
+            Notification.requestPermission().then(function (permission) {
+                const statusText = document.getElementById("notif-status");
+                const notifBtn = document.getElementById("notif-btn");
+
+                if (permission === "granted") {
+                    statusText.innerText = "Úspěšně přihlášeno! Hned vám posíláme ukázkovou zprávu.";
+                    notifBtn.style.display = "none";
+                    
+                    const randomThought = morningThoughts[Math.floor(Math.random() * morningThoughts.length)];
+                    new Notification("Tenči Kane no Kami", {
+                        body: randomThought,
+                    });
+                } else {
+                    statusText.innerText = "Notifikace byly zamítnuty. Můžete je kdykoliv povolit v nastavení prohlížeče.";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
